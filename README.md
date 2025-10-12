@@ -1,114 +1,335 @@
-<a href="https://livekit.io/">
-  <img src="./.github/assets/livekit-mark.png" alt="LiveKit logo" width="100" height="100">
-</a>
+# Tira 🤖
 
-# LiveKit Agents Starter - Python
+> Intelligent AI Collections Agent with Self-Learning Capabilities
 
-A complete starter project for building voice AI apps with [LiveKit Agents for Python](https://github.com/livekit/agents) and [LiveKit Cloud](https://cloud.livekit.io/).
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
+[![LiveKit](https://img.shields.io/badge/LiveKit-Agents-green.svg)](https://livekit.io)
+[![Supabase](https://img.shields.io/badge/Supabase-Database-orange.svg)](https://supabase.com)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-The starter project includes:
+Tira is an advanced AI voice agent designed for debt collection calls, featuring automated self-improvement through LLM-as-a-Judge evaluation. Built with LiveKit, Supabase, and Google Gemini, Tira provides empathetic, compliant, and continuously improving customer interactions.
 
-- A simple voice AI assistant, ready for extension and customization
-- A voice AI pipeline with [models](https://docs.livekit.io/agents/models) from OpenAI, Cartesia, and AssemblyAI served through LiveKit Cloud
-  - Easily integrate your preferred [LLM](https://docs.livekit.io/agents/models/llm/), [STT](https://docs.livekit.io/agents/models/stt/), and [TTS](https://docs.livekit.io/agents/models/tts/) instead, or swap to a realtime model like the [OpenAI Realtime API](https://docs.livekit.io/agents/models/realtime/openai)
-- Eval suite based on the LiveKit Agents [testing & evaluation framework](https://docs.livekit.io/agents/build/testing/)
-- [LiveKit Turn Detector](https://docs.livekit.io/agents/build/turns/turn-detector/) for contextually-aware speaker detection, with multilingual support
-- [Background voice cancellation](https://docs.livekit.io/home/cloud/noise-cancellation/)
-- Integrated [metrics and logging](https://docs.livekit.io/agents/build/metrics/)
-- A Dockerfile ready for [production deployment](https://docs.livekit.io/agents/ops/deployment/)
+## 🏗️ Architecture Overview
 
-This starter app is compatible with any [custom web/mobile frontend](https://docs.livekit.io/agents/start/frontend/) or [SIP-based telephony](https://docs.livekit.io/agents/start/telephony/).
+![System Architecture](./hld/image.png)
 
-## Dev Setup
+## 🔄 Self-Learning Flow
 
-Clone the repository and install dependencies to a virtual environment:
+![Self-Learning Flow](./hld/image%20copy.png)
 
-```console
-cd agent-starter-python
+## ✨ Key Features
+
+- 🎯 **Outbound calling** via LiveKit Telephony
+- 🧠 **Self-learning system** with prompt validation
+- 📊 **8 customer persona evaluation** framework
+- 🎭 **LLM-as-a-Judge** performance assessment
+- 📹 **Auto Egress** call recording
+- 🗄️ **Supabase database** integration
+- 🔍 **Advanced risk analysis** (financial hardship, disputes, etc.)
+- 🛡️ **Prompt validation** with rollback protection
+- 📱 **CLI** for self-learning management
+- 🎨 **FDCPA-compliant** conversation flow
+
+## 🛠️ Tech Stack
+
+- **Python 3.11+** - Core language
+- **LiveKit Agents & Telephony** - Voice AI platform
+- **Google Gemini** - LLM-as-a-Judge evaluation
+- **Supabase** - Database & Storage
+- **Twilio SIP Trunk** - Telephony integration
+- **Regex-based text analysis** - Risk detection
+- **Async/await architecture** - High performance
+
+## 🚀 Quick Start
+
+### 1. Clone and Setup
+
+```bash
+git clone git@github.com:lgsurith/Tira.git
+cd Tira
 uv sync
 ```
 
-Sign up for [LiveKit Cloud](https://cloud.livekit.io/) then set up the environment by copying `.env.example` to `.env.local` and filling in the required keys:
+### 2. Environment Configuration
 
-- `LIVEKIT_URL`
-- `LIVEKIT_API_KEY`
-- `LIVEKIT_API_SECRET`
-
-You can load the LiveKit environment automatically using the [LiveKit CLI](https://docs.livekit.io/home/cli/cli-setup):
+Copy `.env.example` to `.env.local` and configure:
 
 ```bash
-lk cloud auth
-lk app env -w -d .env.local
+cp .env.example .env.local
 ```
 
-## Run the agent
+**Required Environment Variables:**
+```bash
+# LiveKit Configuration
+LIVEKIT_URL=wss://your-livekit-url
+LIVEKIT_API_KEY=your-api-key
+LIVEKIT_API_SECRET=your-api-secret
+LIVEKIT_SIP_TRUNK_ID=your-sip-trunk-id
+LIVEKIT_AGENT_NAME=riverline-agent
 
-Before your first run, you must download certain models such as [Silero VAD](https://docs.livekit.io/agents/build/turns/vad/) and the [LiveKit turn detector](https://docs.livekit.io/agents/build/turns/turn-detector/):
+# Google Gemini (for LLM-as-a-Judge)
+GOOGLE_API_KEY=your-google-api-key
 
-```console
+# Supabase Configuration
+SUPABASE_URL=your-supabase-url
+SUPABASE_ANON_KEY=your-supabase-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+```
+
+### 3. Download Required Models
+
+```bash
 uv run python src/agent.py download-files
 ```
 
-Next, run this command to speak to your agent directly in your terminal:
+### 4. Run the Agent
 
-```console
-uv run python src/agent.py console
-```
-
-To run the agent for use with a frontend or telephony, use the `dev` command:
-
-```console
+**Development Mode:**
+```bash
 uv run python src/agent.py dev
 ```
 
-In production, use the `start` command:
-
-```console
-uv run python src/agent.py start
+**Console Mode (for testing):**
+```bash
+uv run python src/agent.py console
 ```
 
-## Frontend & Telephony
+### 5. Dispatch a Call
 
-Get started quickly with our pre-built frontend starter apps, or add telephony support:
+```bash
+lk dispatch create \
+  --new-room \
+  --agent-name riverline-agent \
+  --metadata '{"phone_number": "+1234567890", "customer_context": {"customer_name": "John Doe", "account_last4": "1234", "balance_amount": "1,500.00", "days_past_due": "30"}}'
+```
 
-| Platform | Link | Description |
-|----------|----------|-------------|
-| **Web** | [`livekit-examples/agent-starter-react`](https://github.com/livekit-examples/agent-starter-react) | Web voice AI assistant with React & Next.js |
-| **iOS/macOS** | [`livekit-examples/agent-starter-swift`](https://github.com/livekit-examples/agent-starter-swift) | Native iOS, macOS, and visionOS voice AI assistant |
-| **Flutter** | [`livekit-examples/agent-starter-flutter`](https://github.com/livekit-examples/agent-starter-flutter) | Cross-platform voice AI assistant app |
-| **React Native** | [`livekit-examples/voice-assistant-react-native`](https://github.com/livekit-examples/voice-assistant-react-native) | Native mobile app with React Native & Expo |
-| **Android** | [`livekit-examples/agent-starter-android`](https://github.com/livekit-examples/agent-starter-android) | Native Android app with Kotlin & Jetpack Compose |
-| **Web Embed** | [`livekit-examples/agent-starter-embed`](https://github.com/livekit-examples/agent-starter-embed) | Voice AI widget for any website |
-| **Telephony** | [📚 Documentation](https://docs.livekit.io/agents/start/telephony/) | Add inbound or outbound calling to your agent |
+## 🧠 Self-Learning System
 
-For advanced customization, see the [complete frontend guide](https://docs.livekit.io/agents/start/frontend/).
+### How It Works
 
-## Tests and evals
+1. **Call Analysis** → Risk Assessment
+2. **Persona Evaluation** → Performance Scoring  
+3. **LLM-as-a-Judge** → Improvement Suggestions
+4. **Prompt Validation** → Safety Check
+5. **Agent Update** → Deployment
+6. **Performance Tracking** → Iteration
 
-This project includes a complete suite of evals, based on the LiveKit Agents [testing & evaluation framework](https://docs.livekit.io/agents/build/testing/). To run them, use `pytest`.
+### Self-Learning CLI Commands
 
-```console
+```bash
+# Run self-learning cycle for a specific call
+uv run python src/self_learning_cli.py run <room_id>
+
+# Check current bot iteration status
+uv run python src/self_learning_cli.py status
+
+# List recent calls available for analysis
+uv run python src/self_learning_cli.py calls
+
+# Show help
+uv run python src/self_learning_cli.py --help
+```
+
+### Example Usage
+
+```bash
+# Analyze a specific call and improve the agent
+uv run python src/self_learning_cli.py run room-abc123
+
+# Check which iteration is currently active
+uv run python src/self_learning_cli.py status
+
+# See available calls for analysis
+uv run python src/self_learning_cli.py calls
+```
+
+## 📊 Customer Personas
+
+Tira evaluates performance against 8 comprehensive customer personas:
+
+1. **Cooperative Customer** - Willing to pay, responsive
+2. **Financial Hardship Customer** - Experiencing money problems
+3. **Disputing Customer** - Questions the debt validity
+4. **Abusive Customer** - Uses offensive language
+5. **Elderly Customer** - May need additional support
+6. **Unemployed Customer** - Lost job, seeking alternatives
+7. **Evasive Customer** - Avoids direct answers
+8. **Payment Plan Customer** - Wants structured payment options
+
+## 🎯 Risk Analysis
+
+Tira automatically detects and flags:
+
+- ✅ **Financial Hardship** - Bankruptcy, job loss, medical bills
+- ✅ **Payment Agreements** - Customer commits to payment
+- ✅ **Payment Refusals** - Customer refuses to pay
+- ✅ **Disputes** - Questions debt validity
+- ✅ **Abusive Language** - Offensive or threatening language
+- ✅ **Wrong Number** - Incorrect contact information
+- ✅ **Callback Requests** - Customer requests follow-up
+- ✅ **Payment Plans** - Requests for structured payments
+
+## 📹 Call Recording
+
+### Auto Egress Setup
+
+Tira automatically records all calls using LiveKit Egress:
+
+```bash
+# Create room with Auto Egress
+./scripts/create_room_with_egress.sh
+
+# List active recordings
+./scripts/list_egress.sh
+
+# Stop specific recording
+./scripts/stop_egress.sh <egress_id>
+
+# Test complete workflow
+./scripts/test_auto_egress.sh
+```
+
+### Recording Storage
+
+- **Format**: MP4 video with audio
+- **Storage**: Supabase Storage
+- **Metadata**: Stored in Supabase database
+- **Access**: Via Supabase dashboard or API
+
+## 🗄️ Database Schema
+
+### Core Tables
+
+- **`calls`** - Call metadata and transcripts
+- **`call_analysis`** - Risk analysis and bot performance
+- **`bot_iterations`** - Self-learning prompt versions
+- **`bot_performance_metrics`** - Performance tracking
+- **`test_scenarios`** - Customer persona definitions
+- **`test_results`** - Evaluation results
+
+## 🛡️ Compliance & Safety
+
+### FDCPA Compliance
+
+- ✅ **Professional greeting** and identity verification
+- ✅ **Empathetic approach** to financial difficulties
+- ✅ **Clear purpose** statement
+- ✅ **Payment options** discussion
+- ✅ **Dispute handling** procedures
+- ✅ **Abusive language** protection
+
+### Prompt Validation
+
+- ✅ **Structure validation** - Ensures required sections
+- ✅ **Content validation** - Checks for completeness
+- ✅ **Length validation** - Prevents truncation
+- ✅ **Placeholder validation** - Maintains dynamic content
+- ✅ **Rollback protection** - Reverts on validation failure
+
+## 🧪 Testing
+
+### Run Tests
+
+```bash
+# Run all tests
 uv run pytest
+
+# Run specific test file
+uv run pytest tests/test_agent.py
+
+# Run with coverage
+uv run pytest --cov=src
 ```
 
-## Using this template repo for your own project
+### Manual Testing
 
-Once you've started your own project based on this repo, you should:
+```bash
+# Test specific call analysis
+uv run python src/analyze_specific_call.py
 
-1. **Check in your `uv.lock`**: This file is currently untracked for the template, but you should commit it to your repository for reproducible builds and proper configuration management. (The same applies to `livekit.toml`, if you run your agents in LiveKit Cloud)
+# Test recent call analysis
+uv run python src/analyze_recent_call.py
+```
 
-2. **Remove the git tracking test**: Delete the "Check files not tracked in git" step from `.github/workflows/tests.yml` since you'll now want this file to be tracked. These are just there for development purposes in the template repo itself.
+## 🚀 Deployment
 
-3. **Add your own repository secrets**: You must [add secrets](https://docs.github.com/en/actions/how-tos/writing-workflows/choosing-what-your-workflow-does/using-secrets-in-github-actions) for `LIVEKIT_URL`, `LIVEKIT_API_KEY`, and `LIVEKIT_API_SECRET` so that the tests can run in CI.
+### Docker Deployment
 
-## Deploying to production
+```bash
+# Build image
+docker build -t tira-agent .
 
-This project is production-ready and includes a working `Dockerfile`. To deploy it to LiveKit Cloud or another environment, see the [deploying to production](https://docs.livekit.io/agents/ops/deployment/) guide.
+# Run container
+docker run -d --env-file .env.local tira-agent
+```
 
-## Self-hosted LiveKit
+### LiveKit Cloud Deployment
 
-You can also self-host LiveKit instead of using LiveKit Cloud. See the [self-hosting](https://docs.livekit.io/home/self-hosting/) guide for more information. If you choose to self-host, you'll need to also use [model plugins](https://docs.livekit.io/agents/models/#plugins) instead of LiveKit Inference and will need to remove the [LiveKit Cloud noise cancellation](https://docs.livekit.io/home/cloud/noise-cancellation/) plugin.
+```bash
+# Deploy to LiveKit Cloud
+lk app deploy
+```
 
-## License
+## 📁 Project Structure
+
+```
+src/
+├── agent.py                    # Main voice agent
+├── self_learning_integration.py # Self-learning system
+├── self_learning_cli.py        # CLI management
+├── post_call_processing/       # Analysis services
+│   ├── services/
+│   │   ├── analysis_service.py # Risk analysis
+│   │   ├── supabase_service.py # Database operations
+│   │   └── transcription_service.py # Speech processing
+│   ├── models/
+│   │   └── call_data.py        # Data models
+│   └── utils/
+│       └── background_processor.py # Async processing
+├── challenge2/                 # Persona evaluation
+│   ├── llm_judge/
+│   │   └── performance_evaluator.py # LLM-as-a-Judge
+│   ├── scenarios/
+│   │   └── customer_personas.py # Persona definitions
+│   └── self_correction/
+│       └── agent_improver.py   # Prompt improvement
+└── scripts/                    # Utility scripts
+    ├── create_room_with_egress.sh
+    ├── list_egress.sh
+    ├── stop_egress.sh
+    └── test_auto_egress.sh
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+### Development Guidelines
+
+- Follow Python best practices
+- Add tests for new features
+- Update documentation
+- Ensure prompt validation
+- Test with multiple personas
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+- **Issues**: [GitHub Issues](https://github.com/lgsurith/Tira/issues)
+- **Documentation**: [LiveKit Docs](https://docs.livekit.io/agents/)
+- **Community**: [LiveKit Discord](https://discord.gg/livekit)
+
+## 🎥 Demo
+
+[Add Loom video link here]
+
+---
+
+**Built with ❤️ using LiveKit, Supabase, and Google Gemini**
