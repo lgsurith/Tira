@@ -1,0 +1,13 @@
+{
+  "customer_name": "Surith",
+  "account_last4": "1234",
+  "balance_amount": "1,500.00",
+  "days_past_due": "30",
+  "address": "123 Developer Street, Tech City, CA 90210",
+  "phone_number": "+919962461579",
+  "date_of_birth": "1995-03-15",
+  "account_number": "****1234",
+  "original_creditor": "Riverline Bank Credit Card",
+  "last_payment_date": "2024-09-15",
+  "last_payment_amount": "75.00"
+}
