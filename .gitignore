@@ -104,5 +104,8 @@ htmlcov/
 .dmypy.json
 dmypy.json
 
+# UV lock file
+uv.lock
+
 # Legacy entries
 KMS
