@@ -1,11 +1,18 @@
-# Tira 🤖
-
-> Intelligent AI Collections Agent with Self-Learning Capabilities
-
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
-[![LiveKit](https://img.shields.io/badge/LiveKit-Agents-green.svg)](https://livekit.io)
-[![Supabase](https://img.shields.io/badge/Supabase-Database-orange.svg)](https://supabase.com)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<div align="center">
+  <img src="./hld/logo.png" alt="Tira Logo" width="120" height="120">
+  
+  # Tira 🤖
+  
+  > **Intelligent AI Collections Agent with Self-Learning Capabilities**
+  
+  [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
+  [![LiveKit](https://img.shields.io/badge/LiveKit-Agents-green.svg)](https://livekit.io)
+  [![Supabase](https://img.shields.io/badge/Supabase-Database-orange.svg)](https://supabase.com)
+  [![Google Cloud](https://img.shields.io/badge/Google_Cloud-Storage-red.svg)](https://cloud.google.com)
+  [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+  
+  *Empathetic • Compliant • Continuously Improving*
+</div>
 
 Tira is an advanced AI voice agent designed for debt collection calls, featuring automated self-improvement through LLM-as-a-Judge evaluation. Built with LiveKit, Supabase, and Google Gemini, Tira provides empathetic, compliant, and continuously improving customer interactions.
 
@@ -19,23 +26,48 @@ Tira is an advanced AI voice agent designed for debt collection calls, featuring
 
 ## ✨ Key Features
 
-- 🎯 **Outbound calling** via LiveKit Telephony
-- 🧠 **Self-learning system** with prompt validation
-- 📊 **8 customer persona evaluation** framework
-- 🎭 **LLM-as-a-Judge** performance assessment
-- 📹 **Auto Egress** call recording
-- 🗄️ **Supabase database** integration
-- 🔍 **Advanced risk analysis** (financial hardship, disputes, etc.)
-- 🛡️ **Prompt validation** with rollback protection
-- 📱 **CLI** for self-learning management
-- 🎨 **FDCPA-compliant** conversation flow
+<table>
+<tr>
+<td width="50%">
+
+### 🎯 **Voice Intelligence**
+- **Outbound calling** via LiveKit Telephony
+- **Real-time conversation** management
+- **Multi-language support** with turn detection
+- **Background noise cancellation**
+
+### 🧠 **Self-Learning AI**
+- **Automated prompt improvement** with LLM-as-a-Judge
+- **8 customer persona evaluation** framework
+- **Performance assessment** and scoring
+- **Continuous optimization** cycle
+
+</td>
+<td width="50%">
+
+### 🔍 **Risk Analysis**
+- **Financial hardship** detection
+- **Payment agreement** tracking
+- **Dispute identification** and handling
+- **Abusive language** protection
+
+### 🛡️ **Compliance & Safety**
+- **FDCPA-compliant** conversation flow
+- **Prompt validation** with rollback protection
+- **Call recording** with Auto Egress
+- **Secure data storage** in GCS
+
+</td>
+</tr>
+</table>
 
 ## 🛠️ Tech Stack
 
 - **Python 3.11+** - Core language
 - **LiveKit Agents & Telephony** - Voice AI platform
 - **Google Gemini** - LLM-as-a-Judge evaluation
-- **Supabase** - Database & Storage
+- **Supabase** - Database & metadata storage
+- **Google Cloud Storage** - Call recording storage
 - **Twilio SIP Trunk** - Telephony integration
 - **Regex-based text analysis** - Risk detection
 - **Async/await architecture** - High performance
@@ -192,9 +224,10 @@ Tira automatically records all calls using LiveKit Egress:
 ### Recording Storage
 
 - **Format**: MP4 video with audio
-- **Storage**: Supabase Storage
+- **Storage**: Google Cloud Storage (GCS) buckets
 - **Metadata**: Stored in Supabase database
-- **Access**: Via Supabase dashboard or API
+- **Access**: Via GCS console or API
+- **Backup**: Automatic redundancy across GCS regions
 
 ## 🗄️ Database Schema
 
@@ -332,4 +365,22 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ using LiveKit, Supabase, and Google Gemini**
+<div align="center">
+
+### 🌟 **Built with Cutting-Edge Technology**
+
+<img src="https://img.shields.io/badge/LiveKit-Agents-00D4AA?style=for-the-badge&logo=livekit" alt="LiveKit">
+<img src="https://img.shields.io/badge/Google-Gemini-4285F4?style=for-the-badge&logo=google" alt="Google Gemini">
+<img src="https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase" alt="Supabase">
+<img src="https://img.shields.io/badge/Google_Cloud-Storage-4285F4?style=for-the-badge&logo=google-cloud" alt="Google Cloud">
+
+---
+
+**🤖 Tira - Revolutionizing Debt Collection with AI**
+
+*Empathetic • Compliant • Continuously Improving*
+
+[![GitHub stars](https://img.shields.io/github/stars/lgsurith/Tira?style=social)](https://github.com/lgsurith/Tira)
+[![GitHub forks](https://img.shields.io/github/forks/lgsurith/Tira?style=social)](https://github.com/lgsurith/Tira)
+
+</div>
