@@ -307,8 +307,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Tira - Revolutionizing Debt Collection with AI**
-
-*Empathetic • Compliant • Continuously Improving*
 
 </div>
